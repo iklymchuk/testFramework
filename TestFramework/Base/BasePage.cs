@@ -10,9 +10,19 @@ namespace TestFramework.Base
 {
     public abstract class BasePage
     {
+        /*
+         * Change to DriverContex approach
+         * 
         public BasePage(IWebDriver driver)
         {
             PageFactory.InitElements(driver, this);
+        }
+        */
+
+        //DriverContext approuch
+        public BasePage()
+        {
+            PageFactory.InitElements(DriverContext.Driver, this);
         }
     }
 }

@@ -11,10 +11,15 @@ namespace TestApplication.Pages
 {
     class StartPage : BasePage
     {
+
+        /*
+         * The BasePage child doesn't need constructor anymore
+         * It will be use default BasePage constructor (with DriverContext approach) 
+         * 
         public StartPage(IWebDriver driver) : base(driver)
         { 
-
         }
+        */
 
         [FindsBy(How = How.LinkText, Using = "Log in")]
         public IWebElement linkLogin { get; set; }
