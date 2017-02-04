@@ -22,15 +22,27 @@ namespace TestApplication.Pages
         */
 
         [FindsBy(How = How.LinkText, Using = "Log in")]
-        public IWebElement linkLogin { get; set; }
+        IWebElement linkLogin { get; set; }
 
         [FindsBy(How = How.Id, Using = "Username")]
-        public IWebElement textUsername { get; set; }
+        IWebElement textUsername { get; set; }
 
         [FindsBy(How = How.Id, Using = "Password")]
-        public IWebElement textPassword { get; set; }
+        IWebElement textPassword { get; set; }
 
         [FindsBy(How = How.Id, Using = "Submit")]
-        public IWebElement buttonLogin { get; set; }
+        IWebElement buttonLogin { get; set; }
+
+        public HomePage Login (string username, string password)
+        {
+            linkLogin.SendKeys(username);
+            textUsername.SendKeys(password);
+            buttonLogin.Submit();
+
+            //return new HomePage();
+
+            //POM with generic approuch
+            return GetInstance<HomePage>();
+        }
     }
 }

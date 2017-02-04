@@ -8,28 +8,15 @@ using System.Threading.Tasks;
 
 namespace TestFramework.Base
 {
-    public abstract class BasePage : Base
+    public class Base
     {
-        /*
-         * Change to DriverContex approach
-         * 
-        public BasePage(IWebDriver driver)
-        {
-            PageFactory.InitElements(driver, this);
-        }
-        */
+        public BasePage CurrentPage { get; set; }
 
         private IWebDriver _driver { get; set; }
 
-        //DriverContext approuch
-        public BasePage()
-        {
-            PageFactory.InitElements(DriverContext.Driver, this);
-        }
-
         protected TPage GetInstance<TPage>() where TPage : BasePage, new()
         {
-            TPage pageInstance = new TPage()
+            TPage pageInstance = new TPage();
             {
                 _driver = DriverContext.Driver
             };
@@ -41,7 +28,7 @@ namespace TestFramework.Base
 
         public TPage As<TPage>() where TPage : BasePage
         {
-            return (TPage)this;
+            return (TPage) this;
         }
     }
 }

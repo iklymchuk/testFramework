@@ -8,7 +8,7 @@ using TestFramework.Base;
 namespace TestApplication
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest1 : Base
     {
         private const string URL = "localhost:3333";
 
@@ -18,23 +18,33 @@ namespace TestApplication
             DriverContext.Driver = new FirefoxDriver();
             DriverContext.Driver.Navigate().GoToUrl(URL);
 
-            // _driver = new FirefoxDriver();
-            // _driver.Navigate().GoToUrl(URL);
 
-            Login();
-        }
-
-        public void Login()
-        {
             /*
-             * Shouldn't use driver instanse for each Page.
-             * It will be set use BasePage constructor (DriverContext approach)
+             * Update POM without Generics
              * 
-             * StartPage page = new StartPage(DriverContext.Driver);
-             */
+            StartPage startPage = new StartPage();
+            HomePage homePage = startPage.Login("user", "password");
+            ProfilePage profilePage = homePage.ClickProfilePageLink();
+            */
 
-            StartPage page = new StartPage();
-            page.linkLogin.Click();
+            /*
+            * POM without Generics
+           StartPage startPage = new StartPage();
+           CurrentPage = startPage.Login("user", "password");
+           ((HomePage)CurrentPage).ClickProfilePageLink();
+           */
+
+            //POM with Generics
+            CurrentPage = GetInstance<StartPage>();
+            //CurrentPage.As<StartPage>(). - other methods on the StartPage
+
+            //Change the current page - now it is HomePage
+            CurrentPage = CurrentPage.As<StartPage>().Login("user", "password");
+            //CurrentPage.As<HomePage>(). - other methods on the HomePage
+
+            //Change the current page - now it is profilePage
+            CurrentPage = CurrentPage.As<HomePage>().ClickProfilePageLink();
         }
+
     }
 }

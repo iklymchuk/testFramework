@@ -59,6 +59,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\ProfilePage.cs" />
     <Compile Include="Pages\StartPage.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
